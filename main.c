@@ -3,23 +3,48 @@
 #include <string.h>
 #include "algo.h"
 
+//I could the define the Strings: Word and text here
+
 #define word 30
 #define Txt 256
 
-// char* Atbash(char* dest,char* source);
+
 
 int main(){
 // collect the texts, check if there will be a problem with an input that has text after ~
-    //char text[Txt];
+    char text[Txt];
     char Word[word];
     scanf("%s",Word);
-    //scanf("%[^~]",text);
-    // printf("The word you gave is:'%s'\n",Word);
-    // printf("The text you gave is:%s",text);
-    char abeshWord[word];
-    Atbash(abeshWord,Word);
-    printf("\nThe Atbash Word is: %s",abeshWord);
+    scanf("%[^~]",text);
+    printf("The word you gave is:'%s'\n",Word);
+    printf("The text you gave is:%s",text);
 
+// TODO still untested
+    int i;
+    
+    //print the Gematira Sequences
+    printf("Gematria Sequences: ");
+    int Gvalue = GematriaValue(Word);
+    for (i = 0; i < strlen(text); i++){
+       GematriaSequence(text,i,Gvalue);
+    }
+    
+    //print the Atbash Sequences
+    printf("\nAtbash Sequences: ");
+    char atbashWord[word];
+    Atbash(atbashWord,Word);
+    for (i = 0; i < strlen(text); i++){
+       if(text[i]==atbashWord[0])
+            AtbashSequences(text,i,atbashWord);
+    }
+
+    //print the Anagram Sequences
+    printf("\nAnagram Sequences: ");
+    for (i = 0; i < strlen(text); i++){
+       if(contains(Word,text[i]))
+            AnagramSequences(text,i,Word);
+    }
+    
     return 0;
 }
 
