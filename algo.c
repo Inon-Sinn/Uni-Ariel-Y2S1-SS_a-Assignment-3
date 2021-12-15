@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include "algo.h"
 
+// Remove afterwards
+int counter1 = 1;
+int counter2 = 1;
+int counter3 = 1;
+
 char* Atbash(char *dest,char *source){
     char *start = dest;
     while (*source != '\0')
@@ -43,13 +48,13 @@ int contains(char *w,char character){
 }
 
     void GematriaSequence(char *txt, int pos, int GValue){
-
+        printf("%d,",counter1++);
     }
 
     void AtbashSequences(char *txt, int pos,char *atbashW){
-
+        printf("%d,",counter2++);
     }
 
     void AnagramSequences(char *txt, int pos,char *w){
-
+        printf("%d,",counter3++);
     }

@@ -21,7 +21,7 @@ int main(){
     scan_Once(Word,text);
     //TODO - this is only to test so Remove it
     printf("The word you gave is:'%s'\n",Word);
-    printf("The text you gave is:%s",text);
+    printf("The text you gave is:'%s'\n",text);
 
     //TODO still untested
     int i;
@@ -30,10 +30,11 @@ int main(){
     printf("Gematria Sequences: ");
     int Gvalue = GematriaValue(Word);
     for (i = 0; i < strlen(text); i++){
-       GematriaSequence(text,i,Gvalue);
+        if ((65<=text[i] && text[i] <= 90)||(97<=text[i] && text[i] <=122))
+            GematriaSequence(text,i,Gvalue);
     }
     
-    //print the Atbash Sequences
+    // //print the Atbash Sequences
     printf("\nAtbash Sequences: ");
     char atbashWord[word];
     Atbash(atbashWord,Word);
@@ -42,7 +43,7 @@ int main(){
             AtbashSequences(text,i,atbashWord);
     }
 
-    //print the Anagram Sequences
+    // //print the Anagram Sequences
     printf("\nAnagram Sequences: ");
     for (i = 0; i < strlen(text); i++){
        if(contains(Word,text[i]))
@@ -51,6 +52,7 @@ int main(){
     
     return 0;
 }
+
 
 //Scans the input - my answer
 void scan_Once(char *Word,char *text){
@@ -81,6 +83,7 @@ void scan_ByChar(char *Word, char *text){
     }
     *start2 = '\0';
 }
+
 
 char* copy(char *dest,char *source){
     char *start = dest;
