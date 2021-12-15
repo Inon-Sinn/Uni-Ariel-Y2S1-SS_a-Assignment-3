@@ -37,6 +37,15 @@ int GematriaValue(char *w){
     
 }
 
+int GematriaCharValue(char c){
+    int res = 0;
+    if(65<=c && c <= 90)
+        res += c - 64;
+    if(97<=c && c <=122)
+        res += c - 96;
+    return res;
+}
+
 int contains(char *w,char character){
     while (*w!='\0')
     {
