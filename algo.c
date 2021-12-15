@@ -2,9 +2,9 @@
 #include "algo.h"
 
 // Remove afterwards
-int counter1 = 1;
-int counter2 = 1;
-int counter3 = 1;
+int firstGematria = 1;
+int firstAtbash = 1;
+int firstAnagram = 1;
 
 char* Atbash(char *dest,char *source){
     char *start = dest;
@@ -56,14 +56,32 @@ int contains(char *w,char character){
     return 0;
 }
 
-    void GematriaSequence(char *txt, int pos, int GValue){
-        printf("%d,",counter1++);
+    void GematriaSequence(char *text, int pos, int GValue){
+        char *start = text;
+        int currentPos = pos;
+        int curVal =0;
+        while (start[currentPos]!='\0' && curVal<GValue)
+        {
+            curVal+=GematriaCharValue(start[currentPos]);
+            currentPos++;
+        }
+        if(curVal==GValue){
+            int length = currentPos-pos+1;
+            char subtext[length];
+            strncpy(subtext,&text[pos],length-1);
+            subtext[length-1] = '\0';
+            if(firstGematria){
+                firstGematria=0;
+                printf("%s",subtext);
+            }
+            else printf("~%s");
+        }
     }
 
-    void AtbashSequences(char *txt, int pos,char *atbashW){
+    void AtbashSequences(char *text, int pos,char *atbashW){
         printf("%d,",counter2++);
     }
 
-    void AnagramSequences(char *txt, int pos,char *w){
+    void AnagramSequences(char *text, int pos,char *w){
         printf("%d,",counter3++);
     }
