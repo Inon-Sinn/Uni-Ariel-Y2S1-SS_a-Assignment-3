@@ -39,8 +39,10 @@ int main(){
     char atbashWord[word];
     Atbash(atbashWord,Word);
     for (i = 0; i < strlen(text); i++){
-       if((text[i]==atbashWord[0]) || (text[i]==atbashWord[strlen(Word)-1]))
-            AtbashSequences(text,i,atbashWord);
+        if(text[i]==atbashWord[0])
+            AtbashSequencesForward(text,i,atbashWord);
+        else if(text[i]==atbashWord[strlen(Word)-1])
+            AtbashSequencesBackward(text,i,atbashWord);
     }
 
     // //print the Anagram Sequences

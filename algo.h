@@ -11,7 +11,9 @@
 
     void GematriaSequence(char *text, int pos, int GValue);
 
-    void AtbashSequences(char *text, int pos,char *atbashW);
+    void AtbashSequencesForward(char *text, int pos,char *atbashW);
+
+    void AtbashSequencesBackward(char *text, int pos,char *atbashW);
 
     void AnagramSequences(char *text, int pos,char *w);
 
