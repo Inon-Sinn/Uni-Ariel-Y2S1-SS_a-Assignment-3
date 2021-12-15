@@ -8,20 +8,24 @@
 #define word 30
 #define Txt 256
 
+char* copy(char *dest,char *source);
 
+void scan_Once(char *Word,char *text);
+
+void scan_ByChar(char *Word, char *text);
 
 int main(){
-// collect the texts, check if there will be a problem with an input that has text after ~
-    char text[Txt];
-    char Word[word];
-    scanf("%s",Word);
-    scanf("%[^~]",text);
+    // collect the texts, check if there will be a problem with an input that has text after ~
+    char text[Txt+1];
+    char Word[word+1];
+    scan_Once(Word,text);
+    //TODO - this is only to test so Remove it
     printf("The word you gave is:'%s'\n",Word);
     printf("The text you gave is:%s",text);
 
-// TODO still untested
+    //TODO still untested
     int i;
-    
+
     //print the Gematira Sequences
     printf("Gematria Sequences: ");
     int Gvalue = GematriaValue(Word);
@@ -48,6 +52,36 @@ int main(){
     return 0;
 }
 
+//Scans the input - my answer
+void scan_Once(char *Word,char *text){
+    scanf("%s",Word);
+    scanf("%[^~]",text);
+}
+
+// What everyone did - Langweilig aka boring
+void scan_ByChar(char *Word, char *text){
+    char input;
+    char *start = Word;
+
+    //Collect the word
+    scanf("%c", &input);
+    while (input != '\n' && input != '\t' && input != ' '){
+        *start = input;
+        start++;
+        scanf("%c", &input);
+    }
+    *start = '\0';
+
+    //Collect the Text
+    char *start2 = text;
+    while (input != '~'){
+                *start2 = input;
+        start2++;
+        scanf("%c", &input);
+    }
+    *start2 = '\0';
+}
+
 char* copy(char *dest,char *source){
     char *start = dest;
     while (*source != '\0')
@@ -56,56 +90,6 @@ char* copy(char *dest,char *source){
         dest++;
         source++;
     }
-    
+    *dest = '\0';
     return start;
 }
-
-// Retuns the given word into its Atbash form
-
-
-
-
-
-//char, char
-
-    // char input;
-    // char w[word];   
-    // // Recieving user input for word
-    // int i = 0;
-    // while (input != '\n' && input != '\t' && input != ' ')
-    // {
-    //     scanf("%c", &input);
-    //     if (input == '\n' || input == '\t' || input == ' ')
-    //     {
-    //         break;
-    //     }
-    //     if (i == 30)
-    //     {
-    //         break;
-    //     }
-    //     w[i] = input;
-    //     ++i;
-    // }
-    // for (i = 0; i <= strlen(w); i++)
-    // {
-    //     printf("%d ",w[i]);
-    // }
-    
-
-    // char w[word];
-    // char letter;
-    // scanf("%c",&letter);
-    // while (letter!=' ' && letter!= '\t' && letter != '\n')
-    // {
-    //     strcat(w,&letter);
-    //     scanf("%c",&letter);
-    // }
-    // char text[Txt];
-    // while (letter !='~')
-    // {
-    //     if(letter!='\n')
-    //         strcat(text,letter);
-    //      scanf("%c",&letter);
-    // }
-    // printf("The word you gave is:'%s'\n",w);
-    // printf("The text you gave is:%s",text);
