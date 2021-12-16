@@ -11,6 +11,7 @@ void printSubString(char *text,int start, int end, int first);
 void removeOnce(char* wordCopy,char c);
 char *strrev(char *str);
 
+//Returns the given string in its Atbash from
 char* Atbash(char *dest,char *source){
     char *start = dest;
     while (*source != '\0')
@@ -28,6 +29,8 @@ char* Atbash(char *dest,char *source){
     return start;
 }
 
+// Returns the GematriaValue of a Word
+// TODO can use GematriaCharValue
 int GematriaValue(char *w){
     int res = 0;
     while (*w!='\0')
@@ -42,6 +45,7 @@ int GematriaValue(char *w){
     
 }
 
+//Returns the Gematria value of a char
 int GematriaCharValue(char c){
     int res = 0;
     if(65<=c && c <= 90)
@@ -51,6 +55,7 @@ int GematriaCharValue(char c){
     return res;
 }
 
+//Return true if the given character is in the given word, False else
 int contains(char *w,char character){
     while (*w!='\0')
     {
@@ -62,6 +67,7 @@ int contains(char *w,char character){
 }
 
 // >>>bee beeb~ -> bee~eeb
+// gets a placement in the text an if its the start of an GematriaSequence, it will print the Sequence
 void GematriaSequence(char *text, int pos, int GValue){
     char *start = text;
     int currentPos = pos;
@@ -79,6 +85,7 @@ void GematriaSequence(char *text, int pos, int GValue){
     }
 }
 
+// gets a placement in the text an if its the start of an AtbashSequences, it will print the Sequence
 void AtbashSequencesForward(char *text, int pos,char *atbashW){
     char *start = text;
     int currentPos = pos;
@@ -105,12 +112,13 @@ void AtbashSequencesForward(char *text, int pos,char *atbashW){
     }
 }
 
- 
+ // gets a placement in the text an if its the start of an AtbashSequences, it will print the Sequence
 void AtbashSequencesBackward(char *text, int pos,char *atbashW){
     strrev(atbashW);//TODO check if its sends the reversed string
     AtbashSequencesForward(text,pos,atbashW);
 }
 
+// gets a placement in the text an if its the start of an AnagramSequences, it will print the Sequence
 void AnagramSequences(char *text, int pos,char *w){
     char *start = text;
     int currentPos = pos;
@@ -138,6 +146,7 @@ void AnagramSequences(char *text, int pos,char *w){
     }
 }
 
+// Prints a Substring from a given text
 //TODO check when it works if you can change int to int* - giving &firstGematria and so on
 void printSubString(char *text,int start, int end, int first){
     int length = end-start+1;
@@ -149,6 +158,7 @@ void printSubString(char *text,int start, int end, int first){
     else printf("~%s",subtext);
 }
 
+//Removes the first occurrence of the specified in the given word
 //TODO check the code
 void removeOnce(char* wordCopy,char c){
     int pos = 0;
@@ -157,6 +167,7 @@ void removeOnce(char* wordCopy,char c){
     memmove(&wordCopy[pos], &wordCopy[pos + 1], strlen(wordCopy) - pos);
 }
 
+//Reverse a given string
 //strrev isn't implemented in linux
 char *strrev(char *str)
 {
