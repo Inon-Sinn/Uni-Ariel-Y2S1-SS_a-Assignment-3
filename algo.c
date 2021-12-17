@@ -86,6 +86,7 @@ void GematriaSequence(char *text, int pos, int GValue){
 
 // gets a placement in the text an if its the start of an AtbashSequences, it will print the Sequence
 void AtbashSequencesForward(char *text, int pos,char *atbashW){
+    //printf("\n-----New Try-----");
     char *start = text;
     int currentPos = pos;
     int atbashPos = 0;
@@ -93,16 +94,22 @@ void AtbashSequencesForward(char *text, int pos,char *atbashW){
     int valid = 1;
     while (start[currentPos]!='\0' && found==0 && valid)
     {
-        if(atbashPos == strlen(atbashW))
-            found = 1;
+        //printf("\ncurrentPos:%d, atbashPos:%d, abtachW len:%zu",currentPos,atbashPos,strlen(atbashW));
+
         if(start[currentPos]!=' '){
+            //printf("\ncurrent %c and the atbash %c",start[currentPos],atbashW[atbashPos]);
             if(start[currentPos] != atbashW[atbashPos])
                 valid=0;//TODO break;//check it goes out of the while
             else atbashPos++;
+            if(atbashPos == strlen(atbashW)){
+                //printf("\nResult: currentPos:%d, atbashPos:%d, abtachW len:%zu",pos,atbashPos,strlen(atbashW));
+                found = 1;
+            }
         }
         currentPos++;
     }
     if(found){
+        //printf("\nAnswer:");
         if(firstAtbash){
             printSubString(text,pos,currentPos,firstAtbash);
             firstAtbash=0;
@@ -115,6 +122,7 @@ void AtbashSequencesForward(char *text, int pos,char *atbashW){
 void AtbashSequencesBackward(char *text, int pos,char *atbashW){
     strrev(atbashW);//TODO check if its sends the reversed string
     AtbashSequencesForward(text,pos,atbashW);
+    strrev(atbashW);//Not really needed but its better for the order
 }
 
 // gets a placement in the text an if its the start of an AnagramSequences, it will print the Sequence

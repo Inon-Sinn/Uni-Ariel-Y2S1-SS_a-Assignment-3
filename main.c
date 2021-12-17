@@ -35,6 +35,7 @@ int main(){
     }
     
     // //print the Atbash Sequences
+    // TODO one too long?
     printf("\nAtbash Sequences: ");
     char atbashWord[word];
     Atbash(atbashWord,Word);
@@ -47,10 +48,10 @@ int main(){
 
     // //print the Anagram Sequences
     printf("\nAnagram Sequences: ");
-    for (i = 0; i < strlen(text); i++){
-       if(contains(Word,text[i]))
-            AnagramSequences(text,i,Word);
-    }
+    // for (i = 0; i < strlen(text); i++){
+    //    if(contains(Word,text[i]))
+    //         AnagramSequences(text,i,Word);
+    // }
     
     return 0;
 }
