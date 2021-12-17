@@ -2,13 +2,14 @@
 #include "algo.h"
 #include <string.h>
 
-// Remove afterwards
 int firstGematria = 1;
 int firstAtbash = 1;
 int firstAnagram = 1;
 
-void printSubString(char *text,int start, int end, int first);
+void printSubString(char *text,int start, int end, int *first);
+
 void removeOnce(char* wordCopy,char c);
+
 char *strrev(char *str);
 
 //Returns the given string in its Atbash from
@@ -65,7 +66,6 @@ int contains(char *w,char character){
     return 0;
 }
 
-// >>>bee beeb~ -> bee~eeb
 // gets a placement in the text an if its the start of an GematriaSequence, it will print the Sequence
 void GematriaSequence(char *text, int pos, int GValue){
     char *start = text;
@@ -76,95 +76,73 @@ void GematriaSequence(char *text, int pos, int GValue){
         currentPos++;
     }
     if(curVal==GValue){
-        if(firstGematria){
-            printSubString(text,pos,currentPos,firstGematria);
-            firstGematria=0;
-        }
-        else printSubString(text,pos,currentPos,firstGematria);
+        printSubString(text,pos,currentPos,&firstGematria);
     }
 }
 
 // gets a placement in the text an if its the start of an AtbashSequences, it will print the Sequence
 void AtbashSequencesForward(char *text, int pos,char *atbashW){
-    //printf("\n-----New Try-----");
     char *start = text;
     int currentPos = pos;
     int atbashPos = 0;
     int found = 0;
-    int valid = 1;
-    while (start[currentPos]!='\0' && found==0 && valid)
+    while (start[currentPos]!='\0' && found==0)
     {
-        //printf("\ncurrentPos:%d, atbashPos:%d, abtachW len:%zu",currentPos,atbashPos,strlen(atbashW));
-
         if(start[currentPos]!=' '){
-            //printf("\ncurrent %c and the atbash %c",start[currentPos],atbashW[atbashPos]);
             if(start[currentPos] != atbashW[atbashPos])
-                valid=0;//TODO break;//check it goes out of the while
+                break;
             else atbashPos++;
             if(atbashPos == strlen(atbashW)){
-                //printf("\nResult: currentPos:%d, atbashPos:%d, abtachW len:%zu",pos,atbashPos,strlen(atbashW));
                 found = 1;
             }
         }
         currentPos++;
     }
     if(found){
-        //printf("\nAnswer:");
-        if(firstAtbash){
-            printSubString(text,pos,currentPos,firstAtbash);
-            firstAtbash=0;
-        }
-        else printSubString(text,pos,currentPos,firstAtbash);
+        printSubString(text,pos,currentPos,&firstAtbash);
     }
 }
 
  // gets a placement in the text an if its the start of an AtbashSequences, it will print the Sequence
 void AtbashSequencesBackward(char *text, int pos,char *atbashW){
-    strrev(atbashW);//TODO check if its sends the reversed string
+    strrev(atbashW);
     AtbashSequencesForward(text,pos,atbashW);
-    strrev(atbashW);//Not really needed but its better for the order
+    strrev(atbashW);
 }
 
 // gets a placement in the text an if its the start of an AnagramSequences, it will print the Sequence
 void AnagramSequences(char *text, int pos,char *w){
-    //printf("\nThe current char is %c",text[pos]);
-    //printf("\nThe current word is '%s'",w);
     char *start = text;
     int currentPos = pos;
     char copy[strlen(w)];
     strcpy(copy,w);
-    //printf("\nThe copy is '%s' and the lenght is %zu",copy,strlen(copy));
     int found = 0;
-    int valid = 1;
-    while (start[currentPos]!='\0' && found==0 && valid)
+    while (start[currentPos]!='\0' && found==0)
     {
         if(contains(copy,start[currentPos])){
             removeOnce(copy,start[currentPos]);
-            if(strlen(copy)==0)// TODO check if it will work
+            if(strlen(copy)==0)
                 found=1;
         }
         else if(start[currentPos]!=' ')
-            valid=0;
+           break;
         currentPos++;
     }
     if(found){
-        if(firstAnagram){
-            printSubString(text,pos,currentPos,firstAnagram);
-            firstAnagram=0;
-        }
-        else printSubString(text,pos,currentPos,firstAnagram);
+        printSubString(text,pos,currentPos,&firstAnagram);
     }
 }
 
 // Prints a Substring from a given text
-//TODO check when it works if you can change int to int* - giving &firstGematria and so on
-void printSubString(char *text,int start, int end, int first){
+void printSubString(char *text,int start, int end, int *first){
     int length = end-start+1;
     char subtext[length];
     strncpy(subtext,&text[start],length-1);
             subtext[length-1] = '\0';
-    if(first)
+    if(*first){
         printf("%s",subtext);
+        *first = 0;
+    }
     else printf("~%s",subtext);
 }
 

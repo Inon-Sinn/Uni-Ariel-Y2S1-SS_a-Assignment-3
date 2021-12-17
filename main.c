@@ -3,10 +3,8 @@
 #include <string.h>
 #include "algo.h"
 
-//I could the define the Strings: Word and text here
-
 #define word 30
-#define Txt 256
+#define Txt 1024
 
 char* copy(char *dest,char *source);
 
@@ -19,11 +17,6 @@ int main(){
     char text[Txt+1];
     char Word[word+1];
     scan_Once(Word,text);
-    //TODO - this is only to test so Remove it
-    // printf("The word you gave is:'%s'\n",Word);
-    // printf("The text you gave is:'%s'\n",text);
-
-    //TODO still untested
     int i;
 
     //print the Gematira Sequences
@@ -35,7 +28,6 @@ int main(){
     }
     
     // //print the Atbash Sequences
-    // TODO one too long?
     printf("\nAtbash Sequences: ");
     char atbashWord[word];
     Atbash(atbashWord,Word);
@@ -86,17 +78,4 @@ void scan_ByChar(char *Word, char *text){
         scanf("%c", &input);
     }
     *start2 = '\0';
-}
-
-
-char* copy(char *dest,char *source){
-    char *start = dest;
-    while (*source != '\0')
-    {
-        *dest = *source;
-        dest++;
-        source++;
-    }
-    *dest = '\0';
-    return start;
 }
