@@ -30,7 +30,6 @@ char* Atbash(char *dest,char *source){
 }
 
 // Returns the GematriaValue of a Word
-// TODO can use GematriaCharValue
 int GematriaValue(char *w){
     int res = 0;
     while (*w!='\0')
@@ -159,7 +158,6 @@ void printSubString(char *text,int start, int end, int first){
 }
 
 //Removes the first occurrence of the specified in the given word
-//TODO check the code
 void removeOnce(char* wordCopy,char c){
     int pos = 0;
     while(wordCopy[pos] != c && wordCopy[pos]!='\0')
@@ -167,8 +165,7 @@ void removeOnce(char* wordCopy,char c){
     memmove(&wordCopy[pos], &wordCopy[pos + 1], strlen(wordCopy) - pos);
 }
 
-//Reverse a given string
-//strrev isn't implemented in linux
+//Reverse a given string, strrev isn't implemented in linux
 char *strrev(char *str)
 {
       char *p1, *p2;

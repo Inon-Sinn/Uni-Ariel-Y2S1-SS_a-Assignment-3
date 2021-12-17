@@ -56,6 +56,7 @@ int main(){
 }
 
 
+
 //Scans the input - my answer
 void scan_Once(char *Word,char *text){
     scanf("%s",Word);
