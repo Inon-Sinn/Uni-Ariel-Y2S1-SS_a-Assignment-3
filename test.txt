@@ -1,6 +1,0 @@
-The word you gave is:'abcd'
-The text you gave is:'
-a-bc,dbca-zwxyzabzyxw0dcba'
-Gematria Sequences: a-bc,d~dbca~dcba
-Atbash Sequences: wxyza~zyxw0
-Anagram Sequences: 

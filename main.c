@@ -20,8 +20,8 @@ int main(){
     char Word[word+1];
     scan_Once(Word,text);
     //TODO - this is only to test so Remove it
-    printf("The word you gave is:'%s'\n",Word);
-    printf("The text you gave is:'%s'\n",text);
+    // printf("The word you gave is:'%s'\n",Word);
+    // printf("The text you gave is:'%s'\n",text);
 
     //TODO still untested
     int i;
@@ -48,10 +48,10 @@ int main(){
 
     // //print the Anagram Sequences
     printf("\nAnagram Sequences: ");
-    // for (i = 0; i < strlen(text); i++){
-    //    if(contains(Word,text[i]))
-    //         AnagramSequences(text,i,Word);
-    // }
+    for (i = 0; i < strlen(text); i++){
+       if(contains(Word,text[i]))
+            AnagramSequences(text,i,Word);
+    }
     
     return 0;
 }

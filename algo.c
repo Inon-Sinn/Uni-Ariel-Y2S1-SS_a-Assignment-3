@@ -127,21 +127,24 @@ void AtbashSequencesBackward(char *text, int pos,char *atbashW){
 
 // gets a placement in the text an if its the start of an AnagramSequences, it will print the Sequence
 void AnagramSequences(char *text, int pos,char *w){
+    //printf("\nThe current char is %c",text[pos]);
+    //printf("\nThe current word is '%s'",w);
     char *start = text;
     int currentPos = pos;
-    char copy[strlen(w)+1];
-    strcpy(copy,text);
+    char copy[strlen(w)];
+    strcpy(copy,w);
+    //printf("\nThe copy is '%s' and the lenght is %zu",copy,strlen(copy));
     int found = 0;
     int valid = 1;
     while (start[currentPos]!='\0' && found==0 && valid)
     {
-        if(strlen(copy)==0)// TODO check if it will work
-            found=1;
-        else if((65<=start[currentPos] && start[currentPos] <= 90)||(97<=start[currentPos] && start[currentPos] <=122)){
-            if (contains(copy,start[currentPos]))
-                removeOnce(copy,start[currentPos]);
-            else valid=0;//TODO check if breack would work here
+        if(contains(copy,start[currentPos])){
+            removeOnce(copy,start[currentPos]);
+            if(strlen(copy)==0)// TODO check if it will work
+                found=1;
         }
+        else if(start[currentPos]!=' ')
+            valid=0;
         currentPos++;
     }
     if(found){
